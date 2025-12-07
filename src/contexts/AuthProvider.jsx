@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword } from 'firebase/auth/cordova';
 import { auth } from '../firebase/firebase.init';
-import { GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { deleteUser, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
     const [emailValue, setEmailValue] = useState(null);
@@ -29,6 +29,9 @@ const AuthProvider = ({ children }) => {
     }
     const userResetPassword = (email) => {
         return sendPasswordResetEmail(auth, email)
+    }
+    const deleteUserAccount = () => {
+        return deleteUser(auth.currentUser)
     }
 
     useEffect(() => {
@@ -58,6 +61,7 @@ const AuthProvider = ({ children }) => {
         emailValue,
         setEmailValue,
         userResetPassword,
+        deleteUserAccount,
 
 
     }
