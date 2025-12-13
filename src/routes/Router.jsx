@@ -18,6 +18,13 @@ import TodaySchedule from "../pages/Dashboard/Decorator/TodaySchedule";
 import RevenueMoniror from "../pages/Dashboard/Admin/RevenueMoniror";
 import Home from "../pages/Home/Home";
 import Coverage from "../pages/Coverage/Coverage";
+import Services from "../pages/Services/Services";
+import ServicesDetails from "../pages/Services/ServicesDetails";
+import Contract from "../pages/Contract/Contract";
+import About from "../pages/About/About";
+import AdminRouter from "./AdminRouter";
+import CreatePack from "../pages/Dashboard/Admin/CreatePack";
+import Payment from "../pages/Payment/Payment";
 
 
 export const router = createBrowserRouter([
@@ -30,11 +37,34 @@ export const router = createBrowserRouter([
                 index: true,
                 element: <Home />
             },
+            // {
+            //     path: "/coverage",
+            //     element: <Coverage />,
+            //     loader: () => fetch('/serviceCenter.json')
+            // },
             {
-                path: "/coverage",
-                element: <Coverage />,
-                loader: () => fetch('/serviceCenter.json')
+                path: "/services",
+                element: <Services />
 
+            },
+            {
+                path: "/services-details/:id",
+                element: <ServicesDetails />
+
+            },
+            {
+                path: "/contract",
+                element: <Contract />
+
+            },
+            {
+                path: "/about",
+                element: <About />
+
+            },
+            {
+                path: "/payment-success",
+                element: <Payment />
             },
         ]
     },
@@ -48,14 +78,18 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <Register />
     },
+    {
+        path: "/payment-success",
+        element: <Payment />
+    },
 
     {
         path: '/dashboard',
         element: <PrivateRouter><DashBoardLayout /> </PrivateRouter>,
         children: [
             {
-                path: 'profile',
-                element: <Profile />
+                path: "profile",
+                element: < Profile />
             },
             // users routes
             {
@@ -96,6 +130,11 @@ export const router = createBrowserRouter([
                 path: 'revinue-monitoring',
                 element: <RevenueMoniror />
             },
+            {
+                path: 'create-package',
+                element: <CreatePack />
+            },
+
 
         ]
     }

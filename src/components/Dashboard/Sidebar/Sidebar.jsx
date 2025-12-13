@@ -9,10 +9,13 @@ import { AiOutlineBars } from 'react-icons/ai'
 import AdminMenu from './AdminMenu'
 import UserMenu from './UserMenu'
 import DecoratorMenu from './DecoratorMenu'
+import useRole from '../../../hooks/useRole'
 
 const Sidebar = () => {
   const { logOut, setUser } = useAuth()
   const [isActive, setActive] = useState(false)
+  const { role } = useRole();
+  console.log(role);
 
 
   const handleToggle = () => {
@@ -30,7 +33,7 @@ const Sidebar = () => {
         <div>
           <div className='block cursor-pointer p-4 font-bold'>
             <Link to='/'>
-              <img src={logo} alt='logo' width='100' height='100' />
+              <img src={logo} alt='logo' className='h-10' />
             </Link>
           </div>
         </div>
@@ -54,7 +57,7 @@ const Sidebar = () => {
             {/* Logo */}
             <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-lime-100 mx-auto'>
               <Link to='/'>
-                <img src={logo} alt='logo' width='100' height='100' />
+                <img src={logo} alt='logo' className='h-10' />
               </Link>
             </div>
           </div>
@@ -62,9 +65,17 @@ const Sidebar = () => {
           {/* Middle Content */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
             {/*  Menu Items */}
-            <AdminMenu />
-            <UserMenu />
-            <DecoratorMenu />
+            {
+              role === 'admin' && <AdminMenu />
+            }
+            {/* <AdminMenu /> */}
+            {
+              role === 'user' && <UserMenu />
+            }
+            {
+              role === 'decorator' && <DecoratorMenu />
+            }
+            {/* <DecoratorMenu /> */}
           </div>
           {/* Bottom Content */}
           <div>

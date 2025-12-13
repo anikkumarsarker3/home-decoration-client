@@ -11,7 +11,7 @@ export function Navbar() {
     const links = <>
         <NavLink to='/' className={({ isActive }) => `hover:text-purple-600 cursor-pointer ${isActive ? "text-blue-600 border-b-2 border-blue-600" : ""}`}>Home</NavLink>
         <NavLink to='/services' className={({ isActive }) => `hover:text-purple-600 cursor-pointer ${isActive ? "text-blue-600 border-b-2 border-blue-600" : ""}`}>Services</NavLink>
-        <NavLink to='/coverage' className={({ isActive }) => `hover:text-purple-600 cursor-pointer ${isActive ? "text-blue-600 border-b-2 border-blue-600" : ""}`}>Coverage</NavLink>
+        {/* <NavLink to='/coverage' className={({ isActive }) => `hover:text-purple-600 cursor-pointer ${isActive ? "text-blue-600 border-b-2 border-blue-600" : ""}`}>Coverage</NavLink> */}
         <NavLink to='/about' className={({ isActive }) => `hover:text-purple-600 cursor-pointer ${isActive ? "text-blue-600 border-b-2 border-blue-600" : ""}`}>About</NavLink>
         <NavLink to='/contract' className={({ isActive }) => `hover:text-purple-600 cursor-pointer ${isActive ? "text-blue-600 border-b-2 border-blue-600" : ""}`}>Contract</NavLink>
     </>

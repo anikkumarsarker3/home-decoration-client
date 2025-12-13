@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify'
 
 const queryClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <div>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Suspense fallback={<LoadingSpinner />}>
@@ -19,5 +19,5 @@ createRoot(document.getElementById('root')).render(
       </AuthProvider>
     </QueryClientProvider>
     <ToastContainer />
-  </StrictMode >,
+  </div >,
 )

@@ -1,15 +1,19 @@
 import React from 'react'
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import UserOrderDataRow from '../../../components/TableRows/UserOrderDataRow';
 const MyBooking = () => {
-  // const axiosSecure = useAxiosSecure();
-  // const { user } = useAuth();
-  // const { data: orders = [] } = useQuery({
-  //   queryKey: ['orders'],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get(`/orders/${user?.email}`)
-  //     return res.data
-  //   }
-  // })
-  // console.log(orders)
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { data: orders = [] } = useQuery({
+    queryKey: ['orders'],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/orders/${user?.email}`)
+      return res.data
+    }
+  })
+  console.log(orders)
 
   return (
     <>
@@ -30,7 +34,7 @@ const MyBooking = () => {
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Name
+                      Service Name
                     </th>
                     <th
                       scope='col'
@@ -66,9 +70,9 @@ const MyBooking = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {
-                    orders.map(order => <CustomerOrderDataRow key={order._id} order={order} />)
-                  } */}
+                  {
+                    orders.map(order => <UserOrderDataRow key={order._id} order={order} />)
+                  }
 
                 </tbody>
               </table>

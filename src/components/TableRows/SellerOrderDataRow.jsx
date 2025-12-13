@@ -1,0 +1,69 @@
+import { useState } from 'react'
+import DeleteModal from '../../Modal/DeleteModal'
+import useAxiosSecure from '../../../hooks/useAxiosSecure'
+const SellerOrderDataRow = ({ product }) => {
+  let [isOpen, setIsOpen] = useState(false)
+  const axiosSecure = useAxiosSecure()
+  const closeModal = () => setIsOpen(false)
+  const handleProcessingOrder = (status, product) => {
+    console.log(product._id)
+    const Update = {
+      status: status,
+      id: product._id
+    }
+    axiosSecure.patch('/orders', Update)
+      .then((res) => console.log(res.data))
+  }
+
+  return (
+    <tr>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>{product.name}</p>
+      </td>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>{product.customerEmail}</p>
+      </td>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>${product.price}</p>
+      </td>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>{product.quantity}</p>
+      </td>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>Dhaka</p>
+      </td>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>{product.status}</p>
+      </td>
+
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <div className='flex items-center gap-2'>
+          <select
+            onChange={(e) => handleProcessingOrder(e.target.value, product)}
+            required
+            className='p-1 border-2 border-lime-300 focus:outline-lime-500 rounded-md text-gray-900  bg-white'
+            name='category'
+            defaultValue={product.status}
+          >
+            <option value='Pending'>Pending</option>
+            <option value='In Progress'>Start Processing</option>
+            <option value='Delivered'>Deliver</option>
+          </select>
+          <button
+            onClick={() => setIsOpen(true)}
+            className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
+          >
+            <span
+              aria-hidden='true'
+              className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
+            ></span>
+            <span className='relative'>Cancel</span>
+          </button>
+        </div>
+        <DeleteModal isOpen={isOpen} closeModal={closeModal} />
+      </td>
+    </tr>
+  )
+}
+
+export default SellerOrderDataRow
