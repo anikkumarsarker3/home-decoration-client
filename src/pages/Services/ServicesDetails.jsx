@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { motion } from "framer-motion";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useRole from "../../hooks/useRole";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 export default function ServicesDetails() {
     const { id } = useParams();
     const [openModal, setOpenModal] = useState(false);
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const { role, roleLoading } = useRole();
 
     const { data: service = {} } = useQuery({
         queryKey: ["service-details", id],
@@ -43,6 +46,9 @@ export default function ServicesDetails() {
                 }
             });
     };
+    if (roleLoading) {
+        return <LoadingSpinner />
+    }
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-10">
@@ -56,7 +62,7 @@ export default function ServicesDetails() {
             />
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-                <h1 className="text-4xl font-bold text-primary">{service?.service_name}</h1>
+                <h1 className="text-4xl font-bold text-primary">{service?.serviceName}</h1>
 
                 <p className="text-3xl font-bold text-secondary mt-3 md:mt-0">
                     $ {service?.cost}
@@ -80,6 +86,14 @@ export default function ServicesDetails() {
             >
                 Book Now
             </button>
+            {
+                role === 'admin' && <Link to={`/edit-service/${service._id}`}
+                    className="btn btn-primary text-lg px-8 py-2 ml-4"
+                >
+                    Update service
+                </Link>
+            }
+
 
             {openModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">

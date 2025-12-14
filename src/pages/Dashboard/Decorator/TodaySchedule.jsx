@@ -20,7 +20,7 @@ const TodaySchedule = () => {
             {data.map(job => (
                 <div key={job._id} className="border p-3 rounded mb-2">
                     <p className="font-medium">{job.name}</p>
-                    <p className="text-sm">📍 {job.location}</p>
+                    <p className="text-sm">Location: {job.location}</p>
                 </div>
             ))}
         </div>

@@ -27,14 +27,12 @@ export default function Services() {
     const filteredServices = useMemo(() => {
         return services.filter((service) => {
             const name = service?.serviceName || "";
-
             const matchesSearch = name.toLowerCase().includes(search.toLowerCase());
             const matchesCategory = category ? service?.category === category : true;
 
             const matchesPrice =
                 Number(service?.cost) >= priceRange.min &&
                 Number(service?.cost) <= priceRange.max;
-
             return matchesSearch && matchesCategory && matchesPrice;
         });
     }, [services, search, category, priceRange.min, priceRange.max]);
@@ -111,9 +109,18 @@ export default function Services() {
                 animate={{ opacity: 1 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
             >
-                {filteredServices.map((service) => (
-                    <Cards key={service._id} service={service} />
-                ))}
+                {
+                    filteredServices.length === 0 && (
+                        <p className="text-center text-gray-500 col-span-full">
+                            No services found matching your criteria.
+                        </p>
+                    )
+                }
+                {
+                    filteredServices.map((service) => (
+                        <Cards key={service._id} service={service} />
+                    ))
+                }
             </motion.div>
         </div>
     );

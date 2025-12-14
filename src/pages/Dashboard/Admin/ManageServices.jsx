@@ -4,14 +4,14 @@ import { useQuery } from '@tanstack/react-query';
 
 const ManageServices = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: users = [] } = useQuery({
-        queryKey: ['manage-users'],
+    const { data: orders = [] } = useQuery({
+        queryKey: ['manage-decorators-services'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users`)
+            const res = await axiosSecure.get(`/manage-decorators-services`)
             return res.data
         }
     })
-    console.log(users)
+    console.log(orders)
     return (
         <div className="overflow-x-auto">
             <table className="table table-zebra">
@@ -19,18 +19,29 @@ const ManageServices = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                        <th>Service Name</th>
+                        <th>Service Location</th>
+                        <th>Service Date</th>
+                        <th>Service Status</th>
+                        <th>Decorator Email</th>
+                        <th>Customer Name(Email)</th>
+                        <th>Action</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        users.map((user, index) => <tr>
+                        orders.map((order, index) => <tr>
                             <th>{index + 1}</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
+                            <td>{order.name}</td>
+                            <td>{order.location}</td>
+                            <td>{order.servideDate}</td>
+                            <td>{order.status}</td>
+                            <td>{order.assignedDecoratorEmail}</td>
+                            <td><span className='font-bold'>{order.customerName}</span> ({order.customerEmail})</td>
+                            <td>
+                                <button className='btn bg-red-400'>Cancel</button>
+                            </td>
                         </tr>)
                     }
 

@@ -25,6 +25,8 @@ import About from "../pages/About/About";
 import AdminRouter from "./AdminRouter";
 import CreatePack from "../pages/Dashboard/Admin/CreatePack";
 import Payment from "../pages/Payment/Payment";
+import LoadingSpinner from "../components/Shared/LoadingSpinner";
+import UpdatePack from "../pages/Dashboard/Admin/UpdatePack";
 
 
 export const router = createBrowserRouter([
@@ -32,6 +34,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: <MainLayout />,
         errorElement: <ErrorPage />,
+        hydrateFallbackElement: <LoadingSpinner />,
         children: [
             {
                 index: true,
@@ -44,12 +47,12 @@ export const router = createBrowserRouter([
             // },
             {
                 path: "/services",
-                element: <Services />
+                element: <PrivateRouter><Services /></PrivateRouter>
 
             },
             {
                 path: "/services-details/:id",
-                element: <ServicesDetails />
+                element: <PrivateRouter><ServicesDetails /></PrivateRouter>
 
             },
             {
@@ -66,13 +69,16 @@ export const router = createBrowserRouter([
                 path: "/payment-success",
                 element: <Payment />
             },
+            {
+                path: "/edit-service/:id",
+                element: <PrivateRouter><AdminRouter><UpdatePack /></AdminRouter></PrivateRouter>
+            },
         ]
     },
-
-
     {
         path: "/login",
         element: <Login />,
+        hydrateFallbackElement: <LoadingSpinner />,
     },
     {
         path: "/register",
@@ -86,6 +92,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRouter><DashBoardLayout /> </PrivateRouter>,
+        hydrateFallbackElement: <LoadingSpinner />,
         children: [
             {
                 path: "profile",

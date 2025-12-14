@@ -4,12 +4,18 @@ import AboutHeroImage from '../../assets/room2.jpg'
 export default function AboutHero() {
     return (
         <section
-            className="relative text-white py-24 px-6 bg-center bg-cover"
-            style={{
-                backgroundImage:
-                    `url(${AboutHeroImage})`,
-            }}
+            className="relative text-white h-[70vh] py-24 px-6 bg-center bg-cover max-w-7xl mx-auto"
+
         >
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-fixed"
+                style={{
+                    backgroundImage:
+                        `url(${AboutHeroImage})`,
+                }}
+            ></div>
+
+
             {/* Dark overlay for text contrast */}
             <div className="absolute inset-0 bg-black/60"></div>
 

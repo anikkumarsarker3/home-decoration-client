@@ -4,7 +4,7 @@ import ContactBgImage from '../../assets/hallway.jpg'
 export default function ContactSection() {
     return (
 
-        <section className="relative py-24 px-6 text-center overflow-hidden rounded-2xl">
+        <section className="relative h-[60vh] py-24 px-6 text-center overflow-hidden rounded-2xl">
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-fixed"

@@ -1,8 +1,19 @@
 import useAuth from '../../../hooks/useAuth'
 import ppbanner from '../../../assets/pp-banner.png'
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const Profile = () => {
   const { user } = useAuth()
+  const axiosSecure = useAxiosSecure();
+  const { data: profile = {} } = useQuery({
+    queryKey: ['login-users'],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/login-users`)
+      return res.data
+    }
+  })
+  console.log(profile)
   return (
     <div className='flex justify-center items-center h-screen'>
       <div className='bg-white shadow-lg rounded-2xl md:w-4/5 lg:w-3/5'>
@@ -15,12 +26,12 @@ const Profile = () => {
           <a href='#' className='relative block'>
             <img
               alt='profile'
-              src={user?.photoURL}
+              src={profile?.photo}
               className='mx-auto object-cover rounded-full h-24 w-24  border-2 border-white '
             />
           </a>
           <p className='p-2 px-4 text-xs text-white bg-primary rounded-full'>
-            User
+            {profile?.role}
           </p>
           <p className='mt-2 text-xl font-medium text-gray-800 '>
             User Id: {user?.uid}

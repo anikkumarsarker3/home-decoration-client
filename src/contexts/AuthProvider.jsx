@@ -62,8 +62,6 @@ const AuthProvider = ({ children }) => {
         setEmailValue,
         userResetPassword,
         deleteUserAccount,
-
-
     }
     return (
         <AuthContext value={authInfo}>

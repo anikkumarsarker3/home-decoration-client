@@ -1,31 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 
 const ManageBooking = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: manageBook = [] } = useQuery({
+    const { data: manageBook = [], refetch } = useQuery({
         queryKey: ['manage-booking'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/orders/manage-booking`)
-            return res.data
+            const res = await axiosSecure.get(`/orders/manage-booking`);
+            return res.data;
         }
-    })
+    });
+
     const { data: decor = [] } = useQuery({
         queryKey: ['all-decorators'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/decorators`)
-            return res.data
+            const res = await axiosSecure.get(`/users/decorators`);
+            return res.data;
         }
-    })
-    console.log(decor)
-    const handleAssignDecorator = (id) => {
+    });
 
-    }
+    // ✅ State to store the current booking ID
+    const [currentBookingId, setCurrentBookingId] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = (bookingId) => {
+        setCurrentBookingId(bookingId);
+        setIsModalOpen(true);
+    };
+
+    const handleAssignDecorator = async (decoratorEmail) => {
+        console.log('Assigning decorator:', decoratorEmail, 'to booking ID:', currentBookingId);
+        if (!currentBookingId) return;
+        await axiosSecure.patch('/orders/assign', {
+            orderId: currentBookingId,
+            assignedDecoratorEmail: decoratorEmail,
+        });
+        refetch();
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="overflow-x-auto">
             <table className="table table-zebra">
-                {/* head */}
                 <thead>
                     <tr>
                         <th></th>
@@ -36,58 +53,70 @@ const ManageBooking = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        manageBook.map((booking, i) => <tr key={booking._id}>
+                    {manageBook.map((booking, i) => (
+                        <tr key={booking._id}>
                             <th>{i + 1}</th>
                             <td>{booking.name}</td>
                             <td>{booking.customerName}</td>
                             <td>{booking.status}</td>
                             <td>
-                                <button className="btn" onClick={() => document.getElementById('my_modal_5').showModal()}>Find Decorator</button>
-                                {/* <button className='btn'>Assign Decorator</button> */}
+                                <button
+                                    className="btn"
+                                    onClick={() => handleOpenModal(booking._id)}
+                                >
+                                    Find Decorator
+                                </button>
+                                {/* You can add another button for a different action and pass booking._id too */}
                             </td>
-                        </tr>)
-                    }
+                        </tr>
+                    ))}
                 </tbody>
             </table>
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
 
-            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
-                    <table className="table table-zebra">
-                        {/* head */}
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                decor.map((d, i) => <tr key={d._id}>
-                                    <th>{i + 1}</th>
-                                    <td>{d.name}</td>
-                                    <td>{d.email}</td>
-                                    <td>{d.status || "available"}</td>
-                                    <td>
-                                        <button onClick={() => handleAssignDecorator(d._id)} className='btn'>Assign</button>
-                                    </td>
-                                </tr>)
-                            }
-
-                        </tbody>
-                    </table>
-
-                    <div className="modal-action">
-                        <form method="dialog">
-                            <button className="btn">Close</button>
-                        </form>
+            {/* Modal */}
+            {isModalOpen && (
+                <dialog open className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box">
+                        <h3 className="font-bold text-lg mb-4">
+                            Assign Decorator to Booking ID: {currentBookingId}
+                        </h3>
+                        <table className="table table-zebra">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {decor.map((d, i) => (
+                                    <tr key={d._id}>
+                                        <th>{i + 1}</th>
+                                        <td>{d.name}</td>
+                                        <td>{d.email}</td>
+                                        <td>{d.status || 'available'}</td>
+                                        <td>
+                                            <button
+                                                className="btn"
+                                                onClick={() => handleAssignDecorator(d.email)}
+                                            >
+                                                Assign
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <div className="modal-action">
+                            <button className="btn" onClick={() => setIsModalOpen(false)}>
+                                Close
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </dialog>
+                </dialog>
+            )}
         </div>
     );
 };
