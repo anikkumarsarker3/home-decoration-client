@@ -1,10 +1,11 @@
 import React from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 const ManageServices = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: orders = [] } = useQuery({
+    const { data: orders = [], refetch } = useQuery({
         queryKey: ['manage-decorators-services'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/manage-decorators-services`)
@@ -12,6 +13,12 @@ const ManageServices = () => {
         }
     })
     console.log(orders)
+    const handleCancelOrder = async (id) => {
+        await axiosSecure.delete(`/orders/${id}`)
+        // return res.data
+        refetch();
+        toast("Successfully cancel");
+    }
     return (
         <div className="overflow-x-auto">
             <table className="table table-zebra">
@@ -40,7 +47,7 @@ const ManageServices = () => {
                             <td>{order.assignedDecoratorEmail}</td>
                             <td><span className='font-bold'>{order.customerName}</span> ({order.customerEmail})</td>
                             <td>
-                                <button className='btn bg-red-400'>Cancel</button>
+                                <button onClick={() => handleCancelOrder(order._id)} className='btn bg-red-400'>Cancel</button>
                             </td>
                         </tr>)
                     }
