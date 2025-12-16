@@ -6,12 +6,6 @@ export default function TopDecorator() {
     const { user } = useAuth()
     const [decorators, setDecorators] = useState([{}, {}, {}]);
 
-    useEffect(() => {
-        fetch("https://your-server.com/decorators")
-            .then((res) => res.json())
-            .then((data) => setDecorators(data));
-    }, []);
-
     return (
         <div className="max-w-7xl mx-auto px-6 py-16">
             <h2 className="text-3xl font-bold mb-8 text-center">Top Decorators</h2>

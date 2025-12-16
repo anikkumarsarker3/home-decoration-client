@@ -102,27 +102,29 @@ const ManageServices = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {paginatedOrders.map((order, index) => (
-                        <tr key={order._id}>
-                            <th>{(currentPage - 1) * limit + index + 1}</th>
-                            <td>{order.name}</td>
-                            <td>{order.location}</td>
-                            <td>{order.servideDate}</td>
-                            <td className="capitalize">{order.status}</td>
-                            <td>{order.assignedDecoratorEmail}</td>
-                            <td>
-                                <span className="font-bold">{order.customerName}</span> ({order.customerEmail})
-                            </td>
-                            <td>
-                                <button
-                                    onClick={() => handleCancelOrder(order._id)}
-                                    className="btn btn-sm bg-red-400 text-white"
-                                >
-                                    Cancel
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {
+                        paginatedOrders.map((order, index) => (
+                            <tr key={order._id}>
+                                <th>{(currentPage - 1) * limit + index + 1}</th>
+                                <td>{order.name}</td>
+                                <td>{order.location}</td>
+                                <td>{order.servideDate}</td>
+                                <td className="capitalize">{order.status}</td>
+                                <td>{order.assignedDecoratorEmail}</td>
+                                <td>
+                                    <span className="font-bold">{order.customerName}</span> ({order.customerEmail})
+                                </td>
+                                <td>
+                                    <button
+                                        onClick={() => handleCancelOrder(order._id)}
+                                        className="btn btn-sm bg-red-400 text-white"
+                                    >
+                                        Cancel
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </table>
 

@@ -46,7 +46,7 @@ export default function ServicesPreview() {
 
                     {
                         services.map((service) => (
-                            <SwiperSlide >
+                            <SwiperSlide key={service._id}>
                                 <div
                                     className="p-6 bg-white shadow rounded-xl ml-5"
                                 >
