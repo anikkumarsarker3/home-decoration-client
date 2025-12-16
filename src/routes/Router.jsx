@@ -27,6 +27,8 @@ import CreatePack from "../pages/Dashboard/Admin/CreatePack";
 import Payment from "../pages/Payment/Payment";
 import LoadingSpinner from "../components/Shared/LoadingSpinner";
 import UpdatePack from "../pages/Dashboard/Admin/UpdatePack";
+import UserRouter from "./UserRouter";
+import DecoratorRouter from "./DecoratorRouter";
 
 
 export const router = createBrowserRouter([
@@ -101,45 +103,45 @@ export const router = createBrowserRouter([
             // users routes
             {
                 path: 'my-booking',
-                element: <MyBooking />
+                element: <UserRouter><MyBooking /></UserRouter>
             },
             {
                 path: 'payment-history',
-                element: <PaymentHistory />
+                element: <UserRouter><PaymentHistory /></UserRouter>
             },
             // Decorator routes
             {
                 path: 'earn-summary',
-                element: <EarningSummary />
+                element: <DecoratorRouter><EarningSummary /></DecoratorRouter>
             },
             {
                 path: 'assign-project',
-                element: <AssignProject />
+                element: <DecoratorRouter><AssignProject /></DecoratorRouter>
             },
             {
                 path: 'today-schedule',
-                element: <TodaySchedule />
+                element: <DecoratorRouter><TodaySchedule /></DecoratorRouter>
             },
             // Admin routes
             {
                 path: 'manage-decorator',
-                element: <ManageDecor />
+                element: <AdminRouter><ManageDecor /></AdminRouter>
             },
             {
                 path: 'manage-service',
-                element: <ManageServices />
+                element: <AdminRouter><ManageServices /></AdminRouter>
             },
             {
                 path: 'manage-booking',
-                element: <ManageBooking />
+                element: <AdminRouter><ManageBooking /></AdminRouter>
             },
             {
                 path: 'revinue-monitoring',
-                element: <RevenueMoniror />
+                element: <AdminRouter><RevenueMoniror /></AdminRouter>
             },
             {
                 path: 'create-package',
-                element: <CreatePack />
+                element: <AdminRouter><CreatePack /></AdminRouter>
             },
 
 
