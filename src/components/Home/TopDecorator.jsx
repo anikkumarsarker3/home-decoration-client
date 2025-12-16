@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 
 export default function TopDecorator() {
     const { user } = useAuth()
-    const [decorators, setDecorators] = useState([{}, {}, {}, {}, {}, {}]);
+    const [decorators, setDecorators] = useState([{}, {}, {}, {}]);
 
     useEffect(() => {
         fetch("https://your-server.com/decorators")
