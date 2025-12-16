@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import useAuth from "../../hooks/useAuth";
+import Photo from '../../assets/apply photo-modified-removebg-preview-modified.png'
 
 export default function TopDecorator() {
-    const { user } = useAuth()
     const [decorators, setDecorators] = useState([{}, {}, {}]);
 
     return (
@@ -20,11 +19,11 @@ export default function TopDecorator() {
                         className="p-6 bg-white rounded-xl shadow hover:shadow-2xl text-center"
                     >
                         <img
-                            // src={d.image}
-                            src={user?.photoURL}
+
+                            src={Photo}
                             className="w-28 h-28 rounded-full object-cover mx-auto mb-4"
                         />
-                        <h3 className="text-xl font-bold">{user?.displayName}</h3>
+                        <h3 className="text-xl font-bold">Sarker</h3>
                         <p className="text-gray-600 mb-2">Specialty: First Serve</p>
                         <p className="text-yellow-500 font-semibold text-lg">⭐ 5.6</p>
                     </motion.div>
