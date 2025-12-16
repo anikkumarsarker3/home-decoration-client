@@ -22,11 +22,10 @@ export default function TopDecorator() {
                         <img
                             // src={d.image}
                             src={user?.photoURL}
-
                             className="w-28 h-28 rounded-full object-cover mx-auto mb-4"
                         />
                         <h3 className="text-xl font-bold">{user?.displayName}</h3>
-                        <p className="text-gray-600 mb-2">Specialty: {d.specialty}</p>
+                        <p className="text-gray-600 mb-2">Specialty: First Serve</p>
                         <p className="text-yellow-500 font-semibold text-lg">⭐ 5.6</p>
                     </motion.div>
                 ))}
