@@ -10,9 +10,9 @@ export default function TopDecorator() {
         <div className="max-w-7xl mx-auto px-6 py-16">
             <h2 className="text-3xl font-bold mb-8 text-center">Top Decorators</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                {decorators.map((d) => (
+                {decorators.map((d, i) => (
                     <motion.div
-                        key={d._id}
+                        key={i}
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}

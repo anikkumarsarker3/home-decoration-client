@@ -5,7 +5,7 @@ const UserOrderDataRow = ({ order }) => {
   const axiosSecure = useAxiosSecure()
   const handleDelete = async (order) => {
     await axiosSecure.delete(`/orders/${order._id}`).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       toast.success("Order canceled successfully");
 
     })

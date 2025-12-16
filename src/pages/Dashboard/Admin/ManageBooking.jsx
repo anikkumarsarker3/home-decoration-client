@@ -30,7 +30,7 @@ const ManageBooking = () => {
     };
 
     const handleAssignDecorator = async (decoratorEmail) => {
-        console.log('Assigning decorator:', decoratorEmail, 'to booking ID:', currentBookingId);
+        // console.log('Assigning decorator:', decoratorEmail, 'to booking ID:', currentBookingId);
         if (!currentBookingId) return;
         await axiosSecure.patch('/orders/assign', {
             orderId: currentBookingId,

@@ -9,13 +9,13 @@ const Payment = () => {
     useEffect(() => {
         axiosSecure.post(`/payment-success?session_id=${sessionId}`)
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 setPaymentInfo({
                     transactionId: res.data.transactionId,
                 })
             })
     }, [sessionId])
-    console.log(sessionId)
+    // console.log(sessionId)
     return (
         <div className='text-center mt-10'>
             <h2 className='font-bold text-3xl'>Payment successfully</h2>

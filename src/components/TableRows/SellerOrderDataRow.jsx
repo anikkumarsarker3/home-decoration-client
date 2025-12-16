@@ -6,13 +6,13 @@ const SellerOrderDataRow = ({ product }) => {
   const axiosSecure = useAxiosSecure()
   const closeModal = () => setIsOpen(false)
   const handleProcessingOrder = (status, product) => {
-    console.log(product._id)
+    // console.log(product._id)
     const Update = {
       status: status,
       id: product._id
     }
     axiosSecure.patch('/orders', Update)
-      .then((res) => console.log(res.data))
+
   }
 
   return (

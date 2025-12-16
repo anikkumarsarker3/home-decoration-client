@@ -58,7 +58,7 @@ const Register = () => {
             navigate(from, { replace: true });
 
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             toast.error(err?.message || "Registration failed");
         }
     };
@@ -80,7 +80,7 @@ const Register = () => {
             navigate(from, { replace: true });
 
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             await deleteUserAccount();
             toast.error(err?.message || "Google signup failed");
         }

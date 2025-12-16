@@ -14,7 +14,7 @@ const ManageDecor = () => {
             return res.data
         }
     })
-    console.log(users)
+    // console.log(users)
     const handleUserDelete = async (id) => {
         await axiosSecure.delete(`/users/delete-user/${id}`);
         alert('User deleted successfully')
@@ -22,13 +22,13 @@ const ManageDecor = () => {
     }
     const statusSteps = ['admin', 'decorator', 'user'];
     const updateUserRole = async (id, role) => {
-        console.log(id, role);
+        // console.log(id, role);
         await axiosSecure.patch(`/users/role/${id}`, { role });
         refetch();
         toast.success('User role updated successfully');
     }
     const handleAccountStatus = async (id, status) => {
-        console.log(id, status);
+        // console.log(id, status);
         if (status === 'available') {
             await axiosSecure.patch(`/users/account-status/${id}`, { accountStatus: 'disabled' });
         }

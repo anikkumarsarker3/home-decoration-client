@@ -37,10 +37,10 @@ export default function ServicesDetails() {
             photo: service?.image,
             category: service?.category,
         };
-        console.log(bookingData);
+        // console.log(bookingData);
         await axiosSecure.post("/create-checkout-session", bookingData)
             .then((res) => {
-                console.log(res.data.url);
+                // console.log(res.data.url);
                 if (res.data.url) {
                     window.location.href = res.data.url;
                 }

@@ -14,7 +14,7 @@ const PaymentHistory = () => {
             return res.data
         }
     })
-    console.log(transation)
+    // console.log(transation)
     return (
         <div className="overflow-x-auto">
             <h3 className='text-center text-3xl font-bold mt-3'>Latest Five Transaction</h3>

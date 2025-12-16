@@ -4,7 +4,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { toast, ToastContainer } from 'react-toastify';
 
 const SellerReqTable = ({ user }) => {
-    console.log(user);
+    // console.log(user);
     const axiosSecure = useAxiosSecure();
     const handleAcceptRole = () => {
         axiosSecure.patch('/users/role', { email: user.email, role: 'seller' })

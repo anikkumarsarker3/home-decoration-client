@@ -13,7 +13,7 @@ const MyBooking = () => {
       return res.data
     }
   })
-  console.log(orders)
+  // console.log(orders)
 
   return (
     <>
