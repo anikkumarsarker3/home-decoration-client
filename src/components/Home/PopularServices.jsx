@@ -5,16 +5,18 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 export default function PopularServices() {
-    // const [services, setServices] = useState([]);
+    const [services, setServices] = useState([]);
     const axiosSecure = useAxiosSecure()
-    const { data: services = [] } = useQuery({
+    const { data: servicess = [] } = useQuery({
         queryKey: ['popular-services'],
         queryFn: async () => {
             const res = await axiosSecure.get('/services');
             return res.data;
         }
     })
-
+    useEffect(() => {
+        setServices(servicess.slice(0, 4))
+    }, [servicess])
     return (
         <div className="max-w-7xl mx-auto px-6 py-16">
             <h2 className="text-3xl font-bold mb-8 text-center">Our Popular Services</h2>
