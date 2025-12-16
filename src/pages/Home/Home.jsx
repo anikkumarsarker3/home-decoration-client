@@ -20,11 +20,14 @@ const Home = () => {
             <Hero />
             <PopularServices />
             <TopDecorator />
-            <ServicesPreview />
-            <Features />
+
+            <ServicesPreview />  {/* Our Service */}
+            <Features />  {/* Why Choose Us */}
             <Testimonials />
-            <ContactSection />
-            <Coverage />
+
+
+            <ContactSection /> {/* COntract */}
+            <Coverage /> {/* Map */}
         </div>
     );
 
