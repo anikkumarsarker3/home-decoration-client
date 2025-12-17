@@ -184,7 +184,7 @@ npm install
 ```
 
 
-### Create a .env file in the root File:
+### Create a .env file in the root Folder:
 ```
 VITE_apiKey=your_firebase_api_key
 VITE_authDomain=your_firebase_auth_domain
