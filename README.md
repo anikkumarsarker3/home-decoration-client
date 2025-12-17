@@ -25,8 +25,7 @@ Local decoration businesses often struggle with:
 ---
 
 ## 🌐 Live Website
-🔗 **Client Live URL:** _[Add your deployed client URL here]_  
-🔗 **Server Live URL:** _[Add your deployed server URL here]_
+[Visit website (click me)](https://home-decoration-ph.web.app/))
 
 ---
 
@@ -175,7 +174,7 @@ Follow the steps below to run StyleDecor locally on your machine.
 
 ### 📥 Clone the Repositories
 ```
-git clone https://github.com/your-username/styledecor-client.git
+git clone https://github.com/anikkumarsarker3/home-decoration-client.git
 ```
 
 ### 📦 Installation
